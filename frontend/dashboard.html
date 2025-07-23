@@ -1,0 +1,85 @@
+<!-- dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UniKart Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar-left">
+  <h2>UniKart</h2>
+  <ul>
+    <li><a href="dashboard.html">Home</a></li>
+    <li><a href="sell.html">Sell</a></li>
+    <li><a href="rent.html">Rent</a></li>
+    <li><a href="mylistings.html">My Listings</a></li>
+  </ul>
+</aside>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Top Navbar -->
+      <header class="navbar">
+        <h1>Welcome to UniKart, <span id="userEmail">User</span></h1>
+        <button id="logoutBtn">Logout</button>
+      </header>
+
+      <!-- Filters -->
+      <div class="filters">
+        <label>Category:
+          <select id="categoryFilter">
+            <option value="All">All</option>
+            <option value="Books">Books</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Stationery">Stationery</option>
+          </select>
+        </label>
+        <label>Department:
+          <select id="departmentFilter">
+            <option value="All">All</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="ME">ME</option>
+          </select>
+        </label>
+        <label>Subject:
+          <select id="subjectFilter">
+            <option value="All">All</option>
+            <option value="DSA">DSA</option>
+            <option value="Math">Math</option>
+            <option value="Drawing">Drawing</option>
+          </select>
+        </label>
+
+        <!-- Sell / Rent Filter Buttons -->
+  <div class="type-filters">
+    <button onclick="filterType('Sell')">Sell</button>
+    <button onclick="filterType('Rent')">Rent</button>
+  </div>
+</div>
+    
+
+      <!-- Listings Container -->
+      <div class="listing-container" id="listingContainer">
+        <!-- Listings will be inserted here by JS -->
+      </div>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="sidebar-right">
+      <h3>Cart</h3>
+      <div id="cartItems">Your cart is empty.</div>
+
+      <h3>Wishlist</h3>
+      <div id="wishlistItems">Your wishlist is empty.</div>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

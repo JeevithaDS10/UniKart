@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>UniKart</title>
+  <style>
+    body { font-family: Arial; max-width: 600px; margin: auto; }
+    input, button, select, textarea { width: 100%; margin-bottom: 10px; padding: 8px; }
+    .product { border: 1px solid #ccc; padding: 10px; margin-top: 10px; }
+    img { max-width: 100%; }
+  </style>
+</head>
+<body>
+
+  <h1>UniKart Marketplace</h1>
+
+  <!-- Sign Up / Login -->
+  <div id="auth">
+    <h2>Signup</h2>
+    <input id="signupEmail" placeholder="Email"><input id="signupPassword" type="password" placeholder="Password">
+    <button onclick="signup()">Sign Up</button>
+    <h2>Login</h2>
+    <input id="loginEmail" placeholder="Email"><input id="loginPassword" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <!-- Add Product -->
+  <div id="productForm" style="display:none;">
+    <h2>Add Product</h2>
+    <input id="title" placeholder="Title">
+    <input id="price" type="number" placeholder="Price">
+    <select id="type"><option value="sell">Sell</option><option value="rent">Rent</option></select>
+    <textarea id="description" placeholder="Description"></textarea>
+    <input id="image" type="file">
+    <button onclick="addProduct()">Add</button>
+  </div>
+
+  <!-- Products List -->
+  <h2>Listings</h2>
+  <div id="productsList"></div>
+
+<script>
+let currentUser = null;
+
+// Utility to call backend
+async function call(path, method, body, isForm = false) {
+  const opts = { method, headers: {} };
+  if (body && !isForm) {
+    opts.headers["Content-Type"] = "application/json";
+    opts.body = JSON.stringify(body);
+  } else if (body) opts.body = body;
+  const res = await fetch("http://localhost:5000/" + path, opts);
+  return res.json();
+}
+
+// Auth
+async function signup() {
+  const email = document.getElementById("signupEmail").value;
+  const password = document.getElementById("signupPassword").value;
+  const res = await call("signup", "POST", {email, password});
+  alert(res.message || res.error);
+}
+async function login() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const res = await call("login", "POST", {email, password});
+  if (res.message) {
+    alert(res.message);
+    currentUser = email;
+    document.getElementById("auth").style.display = "none";
+    document.getElementById("productForm").style.display = "block";
+  } else alert(res.error);
+}
+
+// Add product
+async function addProduct() {
+  const form = new FormData();
+  form.append("title", document.getElementById("title").value);
+  form.append("price", document.getElementById("price").value);
+  form.append("type", document.getElementById("type").value);
+  form.append("description", document.getElementById("description").value);
+  form.append("postedBy", currentUser);
+  const file = document.getElementById("image").files[0];
+  if (file) form.append("image", file);
+  const res = await call("add-product", "POST", form, true);
+  alert(res.message);
+  loadProducts();
+}
+
+// Load listings
+async function loadProducts() {
+  const products = await call("products", "GET");
+  const con = document.getElementById("productsList");
+  con.innerHTML = "";
+  products.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "product";
+    div.innerHTML = `
+      <h3>${p.title} (${p.type})</h3><p>₹${p.price}</p>
+      <p>${p.description}</p>
+      <p><i>Posted by: ${p.postedBy}</i></p>
+      ${p.imageUrl ? `<img src="http://localhost:5000${p.imageUrl}" /> `: ""}
+    `;
+    con.appendChild(div);
+  });
+}
+
+loadProducts();
+</script>
+</body>
+</html>

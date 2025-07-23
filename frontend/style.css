@@ -1,0 +1,268 @@
+/* Base Reset */
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', 'Inter', sans-serif;
+  background: linear-gradient(135deg, #ffe4f0, #f0d9ff);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+  color: #4c004c;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar-left,
+.sidebar-right {
+  width: 220px;
+  padding: 20px;
+  background-color: rgba(255, 240, 255, 0.85);
+  backdrop-filter: blur(6px);
+  box-shadow: 3px 0 12px rgba(0, 0, 0, 0.1);
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Top Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff0fa;
+  padding: 12px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Filters */
+.filters {
+  background: #fff3f9;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  box-shadow: 0 2px 8px rgba(255, 192, 203, 0.3);
+}
+
+/* Listings */
+.listing-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.listing {
+  background: #ffe6ff;
+  padding: 16px;
+  border-radius: 16px;
+  width: 220px;
+  box-shadow: 0 4px 12px rgba(204, 153, 255, 0.4);
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.listing:hover {
+  transform: scale(1.05);
+}
+
+.listing img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.listing h3 {
+  margin: 10px 0 5px;
+  font-size: 1.1rem;
+  color: #880088;
+}
+
+.listing p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Fun Buttons */
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #ff66cc, #cc66ff);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+button:hover {
+  background: linear-gradient(to right, #cc66ff, #ff66cc);
+  transform: scale(1.05);
+}
+
+/* Sidebar */
+.sidebar-left h2 {
+  font-size: 1.8rem;
+  color: #d63384;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.sidebar-left h2::after {
+  content: '🛍';
+  position: absolute;
+  right: -30px;
+  top: 0;
+}
+
+.sidebar-left ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-left ul li {
+  margin: 14px 0;
+}
+
+.sidebar-left ul li a {
+  text-decoration: none;
+  color: #9933cc;
+  font-weight: bold;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #ffe0f5;
+  transition: background 0.2s;
+}
+
+.sidebar-left ul li a:hover {
+  background: #ffc1ea;
+}
+
+/* Right Sidebar */
+.sidebar-right h3 {
+  font-size: 1.2rem;
+  color: #cc00cc;
+  margin-top: 0;
+}
+
+#cartItems,
+#wishlistItems {
+  font-size: 0.9rem;
+  background: #fbeaff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  min-height: 50px;
+}
+
+/* Optional Cartoon Decoration */
+main::before {
+  content: url('https://cdn-icons-png.flaticon.com/512/742/742751.png');
+  position: absolute;
+  top: 60px;
+  right: 60px;
+  width: 60px;
+  height: 60px;
+  opacity: 0.8;
+}
+/* Login Page Theme */
+.login-body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe0f0, #f5d1ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  background: #fff0fa;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(200, 100, 255, 0.4);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-card h1 {
+  margin-bottom: 10px;
+  color: #cc33cc;
+}
+
+.login-card p {
+  margin-bottom: 20px;
+  color: #9933cc;
+}
+
+.login-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 2px solid #ffb3ec;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.login-card input:focus {
+  outline: none;
+  border-color: #d266ff;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #ff66cc, #cc66ff);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: 'Comic Sans MS', cursive;
+}
+
+.login-card button:hover {
+  background: linear-gradient(to right, #cc66ff, #ff66cc);
+  transform: scale(1.03);
+}
+
+.signup-text {
+  margin-top: 16px;
+  font-size: 0.95rem;
+}
+
+.signup-text a {
+  color: #cc33cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
